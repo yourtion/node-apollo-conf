@@ -1,26 +1,9 @@
-import { stringify } from "querystring";
+import { createQuery } from "./utils";
 
-const isPlainObject = (o: any) => Object.keys(o).length === 0;
-
-function createQuery(options: Record<string, any>) {
-  const query = Object.keys(options).reduce(
-    (ret, key) => {
-      const v = options[key];
-      if (v !== undefined && v !== null) {
-        ret[key] = v;
-      }
-      return ret;
-    },
-    {} as Record<string, any>
-  );
-
-  if (isPlainObject(query)) return "";
-
-  return `?${stringify(query)}`;
-}
-
-// https://github.com/ctripcorp/apollo/wiki/%E5%85%B6%E5%AE%83%E8%AF%AD%E8%A8%80%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E6%8C%87%E5%8D%97
-
+/**
+ * URL生成与构建
+ * @link https://github.com/ctripcorp/apollo/wiki/%E5%85%B6%E5%AE%83%E8%AF%AD%E8%A8%80%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%85%A5%E6%8C%87%E5%8D%97
+ */
 export interface IQueryConfig {
   // Apollo配置服务的地址
   url: string;
